@@ -49,7 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        android:background="#FFFF00"
 
         android:orientation="horizontal">
 
@@ -59,17 +58,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF0000"
 
             android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/panel_IMG_road1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop" />
+
+
+
             <ImageView
                 android:id="@+id/panel_IMG_car1"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:visibility="gone"
-                android:src="@drawable/img_race_car" />
+                android:src="@drawable/img_red_car" />
 
             <ImageView
                 android:id="@+id/panel_IMG_obstacle11"
@@ -107,21 +115,38 @@
                 android:visibility="gone"
                 android:src="@drawable/img_obstacle" />
 
+            <ImageView
+                android:id="@+id/panel_IMG_boom1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+
+                android:src="@drawable/img_boom" />
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#00FFAA">
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/panel_IMG_road2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+
 
             <ImageView
                 android:id="@+id/panel_IMG_car2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
-                android:src="@drawable/img_race_car"
+                android:src="@drawable/img_red_car"
                 />
 
             <ImageView
@@ -160,24 +185,40 @@
                 android:visibility="gone"
                 android:src="@drawable/img_obstacle" />
 
+            <ImageView
+                android:id="@+id/panel_IMG_boom2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:src="@drawable/img_boom" />
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#AAFFAA"
 
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/panel_IMG_road3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+
+
+            <ImageView
                 android:id="@+id/panel_IMG_car3"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:visibility="gone"
-                android:src="@drawable/img_race_car" />
+                android:src="@drawable/img_red_car" />
 
             <ImageView
                 android:id="@+id/panel_IMG_obstacle31"
@@ -214,6 +255,15 @@
                 android:layout_centerInParent="true"
                 android:visibility="gone"
                 android:src="@drawable/img_obstacle" />
+
+            <ImageView
+                android:id="@+id/panel_IMG_boom3"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:src="@drawable/img_boom" />
 
 
         </RelativeLayout>
