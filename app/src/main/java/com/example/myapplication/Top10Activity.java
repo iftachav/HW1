@@ -24,6 +24,8 @@ public class Top10Activity extends AppCompatActivity {
     private ListFragment listFragment;
     private MapFragment mapFragment;
     private FusedLocationProviderClient fusedLocationClient;
+    private MSPV3 sp = MSPV3.getMe();
+
 
 
     @Override
@@ -32,10 +34,30 @@ public class Top10Activity extends AppCompatActivity {
         this.bundle = getIntent().getBundleExtra(StartActivity.BUNDLE_KEY);
         fusedLocationClient    = LocationServices.getFusedLocationProviderClient(this);
         setContentView(R.layout.activity_top10);
-        MSPV3 sp = MSPV3.getMe();
         String json1=sp.getString(RECORD_DB_KEY, new Gson().toJson(new RecordDB()));
         recordDB= new Gson().fromJson(json1, RecordDB.class);
         updateRecordDB();
+        createNewList();
+
+//        sp.putString(RECORD_DB_KEY, new Gson().toJson(recordDB));
+//
+//        listFragment = new ListFragment();
+//        listFragment.setActivity(this);
+//        listFragment.setRecordDB(recordDB);
+//        listFragment.setCallBackList(index -> {
+//            zoomInMap(index);
+////            updateRecordDB();
+//        });
+//        getSupportFragmentManager().beginTransaction().add(R.id.list_frame, listFragment).commit();
+//
+//
+//        mapFragment = new MapFragment();
+////        mapFragment.setActivity(this);
+//        getSupportFragmentManager().beginTransaction().add(R.id.map_frame, mapFragment).commit();
+
+    }
+
+    private void createNewList() {
         sp.putString(RECORD_DB_KEY, new Gson().toJson(recordDB));
 
         listFragment = new ListFragment();
@@ -43,14 +65,14 @@ public class Top10Activity extends AppCompatActivity {
         listFragment.setRecordDB(recordDB);
         listFragment.setCallBackList(index -> {
             zoomInMap(index);
+//            updateRecordDB();
         });
-        getSupportFragmentManager().beginTransaction().add(R.id.frame1, listFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.list_frame, listFragment).commit();
 
 
         mapFragment = new MapFragment();
 //        mapFragment.setActivity(this);
         getSupportFragmentManager().beginTransaction().add(R.id.map_frame, mapFragment).commit();
-
     }
 
     private void zoomInMap(int index) {
@@ -70,7 +92,12 @@ public class Top10Activity extends AppCompatActivity {
             if(records.size() > 10){
                 records.remove(10);
             }
+            createNewList();
+//            sp.putString(RECORD_DB_KEY, new Gson().toJson(recordDB));
         });
+//        listFragment.setRecordDB(recordDB);
+//        getSupportFragmentManager().beginTransaction().add(R.id.list_frame, listFragment).commit();
+
 
     }
     private void getLocation(CallBackOfGPS callBackOfGPS){
