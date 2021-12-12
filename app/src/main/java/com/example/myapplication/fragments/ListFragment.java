@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.fragments;
 
 import android.os.Bundle;
 
@@ -10,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.myapplication.R;
+import com.example.myapplication.etc.Record;
+import com.example.myapplication.etc.RecordDB;
+import com.example.myapplication.callbacks.CallBackList;
 
 public class ListFragment extends Fragment {
 

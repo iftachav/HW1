@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.fragments.AccFragment;
+import com.example.myapplication.fragments.ButtonsFragment;
+import com.example.myapplication.callbacks.CallBackMovePlayer;
+import com.example.myapplication.R;
 
 import java.util.Arrays;
 import java.util.Random;

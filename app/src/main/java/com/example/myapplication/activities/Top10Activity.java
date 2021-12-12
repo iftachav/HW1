@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -6,14 +6,24 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.myapplication.callbacks.CallBackOfGPS;
+import com.example.myapplication.fragments.ListFragment;
+import com.example.myapplication.etc.MSPV3;
+import com.example.myapplication.fragments.MapFragment;
+import com.example.myapplication.R;
+import com.example.myapplication.etc.Record;
+import com.example.myapplication.etc.RecordDB;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Top10Activity extends AppCompatActivity {
     public static final String PLAYER_SCORE_KEY= "PLAYER_SCORE_KEY";
@@ -37,24 +47,7 @@ public class Top10Activity extends AppCompatActivity {
         String json1=sp.getString(RECORD_DB_KEY, new Gson().toJson(new RecordDB()));
         recordDB= new Gson().fromJson(json1, RecordDB.class);
         updateRecordDB();
-        createNewList();
-
-//        sp.putString(RECORD_DB_KEY, new Gson().toJson(recordDB));
-//
-//        listFragment = new ListFragment();
-//        listFragment.setActivity(this);
-//        listFragment.setRecordDB(recordDB);
-//        listFragment.setCallBackList(index -> {
-//            zoomInMap(index);
-////            updateRecordDB();
-//        });
-//        getSupportFragmentManager().beginTransaction().add(R.id.list_frame, listFragment).commit();
-//
-//
-//        mapFragment = new MapFragment();
-////        mapFragment.setActivity(this);
-//        getSupportFragmentManager().beginTransaction().add(R.id.map_frame, mapFragment).commit();
-
+//        createNewList();
     }
 
     private void createNewList() {
@@ -71,7 +64,7 @@ public class Top10Activity extends AppCompatActivity {
 
 
         mapFragment = new MapFragment();
-//        mapFragment.setActivity(this);
+        mapFragment.setActivity(this);
         getSupportFragmentManager().beginTransaction().add(R.id.map_frame, mapFragment).commit();
     }
 
@@ -82,38 +75,42 @@ public class Top10Activity extends AppCompatActivity {
 
     private void updateRecordDB() {
         currentScore = bundle.getInt(PLAYER_SCORE_KEY,-1);
-        if(currentScore == -1)
+        if(currentScore == -1) {
+            createNewList();
             return;
+        }
         String currentTime = new Date().toString();
         ArrayList<Record> records = recordDB.getRecords();
         getLocation((lat, lon) -> {
             records.add(new Record().setScore(currentScore).setTime(currentTime).setLat(lat).setLon(lon));
+            Log.d("aaa", "lat is "+lat+"lon is " +lon);
             records.sort((a, b) -> (b.getScore() - a.getScore()));
             if(records.size() > 10){
                 records.remove(10);
             }
             createNewList();
-//            sp.putString(RECORD_DB_KEY, new Gson().toJson(recordDB));
         });
-//        listFragment.setRecordDB(recordDB);
-//        getSupportFragmentManager().beginTransaction().add(R.id.list_frame, listFragment).commit();
 
 
     }
+
+
     private void getLocation(CallBackOfGPS callBackOfGPS){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
             fusedLocationClient.getLastLocation().addOnCompleteListener( task->{
                 Location location = task.getResult();
                 if(location!=null)
                     callBackOfGPS.getUserLocation(location.getLatitude(), location.getLongitude());
-                else
+                else {
+                    Log.d("aaa", "location null");
                     callBackOfGPS.getUserLocation(0.0, 0.0);
+                }
             });
 
         }
         else {
+            Log.d("aaa", "no permission");
             callBackOfGPS.getUserLocation(0.0, 0.0);
         }
     }

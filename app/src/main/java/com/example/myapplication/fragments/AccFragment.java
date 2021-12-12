@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.fragments;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.myapplication.R;
+import com.example.myapplication.callbacks.CallBackMovePlayer;
 
 
 public class AccFragment extends Fragment {

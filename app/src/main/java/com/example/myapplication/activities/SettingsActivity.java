@@ -1,10 +1,13 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.example.myapplication.etc.MSPV3;
+import com.example.myapplication.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

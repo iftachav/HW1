@@ -1,10 +1,15 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.myapplication.etc.MSPV3;
+import com.example.myapplication.R;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -15,6 +20,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        grantLocationPermission();
         bundle = new Bundle();
         setContentView(R.layout.activity_start);
         findViews();
@@ -34,6 +40,11 @@ public class StartActivity extends AppCompatActivity {
         initBundle();
         myIntent.putExtra(BUNDLE_KEY, bundle);
         startActivity(myIntent);
+    }
+
+    private void grantLocationPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}  , 44);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 44);
     }
 
     private void initBundle() {

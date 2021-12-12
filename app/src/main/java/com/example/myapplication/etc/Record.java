@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.etc;
 
 public class Record {
     private String time = "";
